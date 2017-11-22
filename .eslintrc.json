@@ -1,0 +1,17 @@
+{
+    "extends": "airbnb-base",
+    "env": {
+        "node": true,
+        "browser": true
+    },
+    "plugins": [
+        "import"
+    ],
+    "rules": {
+        "no-console": "off",
+        "indent": ["error", 4],
+        "no-unused-vars": "warn",
+        "import/no-extraneous-dependencies": "off",
+        "no-continue": "off"
+    }
+}

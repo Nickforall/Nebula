@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Nebula</title>
+        <link rel="stylesheet" href="nebula.css">
+
+        <!-- this is where dynamic theme styling rules are loaded in -->
+        <style>
+        nebula-editor {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        </style>
+    </head>
+    <body>
+        <nebula-editor id="main">
+            <div class="line"><span class="number">1</span>Hello, world</div>
+            <div class="line">This is code</div>
+            <div id="cursor" class="cursor"></div>
+        </nebula-editor>
+
+        <canvas id="measurements">
+
+        </canvas>
+
+        <script>
+            const Editor = require("../src/editor");
+
+            window.addEventListener('load', () => {
+                let main = document.getElementById("main");
+                let main_editor = new Editor(main);
+            });
+        </script>
+    </body>
+</html>
