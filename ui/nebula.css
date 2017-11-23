@@ -56,3 +56,9 @@ nebula-editor textarea {
     left: 1000vw;
     opacity: 0;
 }
+
+#measurements {
+    position: fixed;
+    left: 1000vw;
+    opacity: 0;
+}

@@ -21,15 +21,19 @@
         </nebula-editor>
 
         <canvas id="measurements">
-
         </canvas>
 
         <script>
-            const Editor = require("../src/editor");
+            const Editor = require('../src/Editor');
+            const _Nebula = require('../src/Nebula');
+
+            var Nebula = new _Nebula();
 
             window.addEventListener('load', () => {
                 let main = document.getElementById("main");
                 let main_editor = new Editor(main);
+                Nebula.setEditor(main_editor);    
+                Nebula.setLoaded(true);         
             });
         </script>
     </body>

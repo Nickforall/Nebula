@@ -1,4 +1,4 @@
-const Measurements = require('./Measurements');
+const Cursor = require('./Cursor');
 
 class Editor {
     constructor(element) {
@@ -30,17 +30,11 @@ class Editor {
         });
 
         this.lines = [];
-
+        this.cursor = new Cursor(this);
         this.timer = Date.now();
 
         this.loadFile();
-
         this.updateCursor();
-    }
-
-    updateCursor() {
-        const startPos = this.inputPositionToPixels(this.getInputCursorPos().start);
-        this.setCursor(startPos.x, startPos.y);
     }
 
     handleEvent() {
@@ -49,27 +43,13 @@ class Editor {
         const value = this.input.value;
         this.lines = value.split('\n');
 
-        this.updateCursor();
+        this.cursor.updateCursor();
         this.draw();
     }
 
     handleKeyDown() {
         // in here we handle possible cursor movements on keydown
-        this.updateCursor();
-    }
-
-    /**
-     * Sets the cursor on the screen
-     * @param {double} x coord in pixels
-     * @param {double} y coord in pixels
-     */
-    setCursor(x, y) {
-        this.cursor = [x, y];
-
-        const cursorElement = document.getElementById('cursor');
-        cursorElement.style.left = `${x}px`;
-        cursorElement.style.top = `${y}px`;
-        cursorElement.style.position = 'absolute';
+        this.cursor.updateCursor();
     }
 
     loadFile(path) {
@@ -144,32 +124,6 @@ class Editor {
             }
         }
         return -1;
-    }
-
-    inputPositionToPixels(pos) {
-        const lines = this.input.value.split('\n');
-        let position = pos;
-
-        for (let index = 0; index < lines.length; index += 1) {
-            const element = lines[index];
-
-            if (element.length < position) {
-                position -= element.length;
-                position -= 1;
-                continue;
-            } else {
-                const w = Measurements.textWidth(element.substring(0, position));
-                return {
-                    x: 60 + w,
-                    y: index * 16,
-                };
-            }
-        }
-
-        return {
-            x: 60,
-            y: 0,
-        };
     }
 }
 
